@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таймер до важного события</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-blur bg-blur--one"></div>
+    <div class="bg-blur bg-blur--two"></div>
+
+    <main class="container">
+      <header class="hero">
+        <h1>Таймер до важного события</h1>
+        <p class="hero-subtitle">Выберите событие и узнайте, сколько осталось времени.</p>
+      </header>
+
+      <section class="card controls-card">
+        <h2>Выбор события</h2>
+        <form id="event-form" class="event-form">
+          <div class="field">
+            <label for="preset-event">Готовые события</label>
+            <select id="preset-event" name="preset-event">
+              <option value="none">-- Выбрать из списка --</option>
+              <option value="birthday-1">День рождения тимура (25/09)</option>
+              <option value="vacation">Летние каникулы (30/06)</option>
+              <option value="new-year">Новый год (30/12)</option>
+              <option value="birthday-2">День рождения даши (20/06)</option>
+              <option value="birthday-3">День рождения рама(25/12)</option>
+              <option value="birthday-4">День рождения артура и илюши(03/02)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="event-name">Название события</label>
+            <input
+              id="event-name"
+              name="event-name"
+              type="text"
+              placeholder="Например: Моя олимпиада"
+              required
+              maxlength="70"
+            />
+          </div>
+
+          <div class="field">
+            <label for="event-date">Дата события</label>
+            <input id="event-date" name="event-date" type="date" required />
+          </div>
+
+          <button type="submit" class="btn-primary">Запустить таймер</button>
+        </form>
+      </section>
+
+      <section class="card countdown-card">
+        <div class="event-summary">
+          <p><span>Событие:</span> <strong id="event-title">-</strong></p>
+          <p><span>Дата:</span> <strong id="event-date-text">-</strong></p>
+        </div>
+
+        <p id="status-message" class="status-message" aria-live="polite"></p>
+
+        <div class="timer-grid" aria-live="polite">
+          <div class="time-box">
+            <span id="months">0</span>
+            <small>Месяцев</small>
+          </div>
+          <div class="time-box">
+            <span id="weeks">0</span>
+            <small>Недель</small>
+          </div>
+          <div class="time-box">
+            <span id="days">0</span>
+            <small>Дней</small>
+          </div>
+          <div class="time-box">
+            <span id="hours">0</span>
+            <small>Часов</small>
+          </div>
+          <div class="time-box">
+            <span id="minutes">0</span>
+            <small>Минут</small>
+          </div>
+          <div class="time-box">
+            <span id="seconds">0</span>
+            <small>Секунд</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="card fact-card">
+        <h2>Факт дня</h2>
+        <p id="fact-day">Загружаем интересный факт...</p>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
