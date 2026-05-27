@@ -49,6 +49,7 @@
 
   let timerId = null;
   let currentEvent = null;
+  let hasSentFinishNotification = false;
 
   init();
 
@@ -100,6 +101,7 @@
     }
 
     currentEvent = { title, date: chosenDate };
+    hasSentFinishNotification = false;
     saveToStorage(currentEvent);
     renderEventSummary(currentEvent);
     startOrRefreshTimer();
@@ -125,6 +127,7 @@
     if (target.getTime() <= now.getTime()) {
       setPartsToZero();
       dom.statusMessage.textContent = "Событие уже наступило!";
+      notifyEventReached();
       return;
     }
 
@@ -234,6 +237,7 @@
       }
 
       currentEvent = { title: parsed.title, date: restoredDate };
+      hasSentFinishNotification = false;
       dom.nameInput.value = parsed.title;
       dom.dateInput.value = parsed.date;
       renderEventSummary(currentEvent);
@@ -247,6 +251,7 @@
     const preset = PRESET_EVENTS["new-year"];
     const date = getNearestDateFromDayMonth(preset.day, preset.month);
     currentEvent = { title: preset.title, date };
+    hasSentFinishNotification = false;
     dom.nameInput.value = preset.title;
     dom.dateInput.value = toDateInputValue(date);
     dom.preset.value = "new-year";
@@ -283,6 +288,36 @@
 
   function padNumber(value) {
     return String(value).padStart(2, "0");
+  }
+
+  function notifyEventReached() {
+    if (hasSentFinishNotification || !currentEvent) {
+      return;
+    }
+
+    hasSentFinishNotification = true;
+
+    // Отправляем уведомление только если браузер поддерживает и есть разрешение.
+    if (!("Notification" in window)) {
+      return;
+    }
+
+    if (Notification.permission === "granted") {
+      new Notification("Таймер завершен", {
+        body: `Событие "${currentEvent.title}" уже наступило!`
+      });
+      return;
+    }
+
+    if (Notification.permission === "default") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted" && currentEvent) {
+          new Notification("Таймер завершен", {
+            body: `Событие "${currentEvent.title}" уже наступило!`
+          });
+        }
+      });
+    }
   }
 
   function renderFactOfDay() {
@@ -327,4 +362,3 @@
     return `${y}-${m}-${d}`;
   }
 })();
- 
