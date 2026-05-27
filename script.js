@@ -37,6 +37,7 @@
     statusMessage: document.getElementById("status-message"),
     factDay: document.getElementById("fact-day"),
     parts: {
+      years: document.getElementById("years"),
       months: document.getElementById("months"),
       weeks: document.getElementById("weeks"),
       days: document.getElementById("days"),
@@ -130,6 +131,7 @@
     dom.statusMessage.textContent = "";
 
     const diff = getDetailedTimeDiff(now, target);
+    dom.parts.years.textContent = String(diff.years);
     dom.parts.months.textContent = String(diff.months);
     dom.parts.weeks.textContent = String(diff.weeks);
     dom.parts.days.textContent = String(diff.days);
@@ -138,7 +140,7 @@
     dom.parts.seconds.textContent = padNumber(diff.seconds);
   }
 
-  // Вычисление разницы: месяцы, недели, дни, часы, минуты, секунды.
+  // Вычисление разницы: годы, месяцы, недели, дни, часы, минуты, секунды.
   function getDetailedTimeDiff(fromDate, toDate) {
     let temp = new Date(fromDate.getTime());
     let months = 0;
@@ -153,6 +155,10 @@
         break;
       }
     }
+
+    // Если месяцев набралось больше 11, переносим их в годы.
+    const years = Math.floor(months / 12);
+    months %= 12;
 
     let remainingMs = toDate.getTime() - temp.getTime();
     const dayMs = 24 * 60 * 60 * 1000;
@@ -179,10 +185,11 @@
 
     const seconds = Math.floor(remainingMs / secondMs);
 
-    return { months, weeks, days, hours, minutes, seconds };
+    return { years, months, weeks, days, hours, minutes, seconds };
   }
 
   function setPartsToZero() {
+    dom.parts.years.textContent = "0";
     dom.parts.months.textContent = "0";
     dom.parts.weeks.textContent = "0";
     dom.parts.days.textContent = "0";
