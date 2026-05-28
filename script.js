@@ -190,8 +190,8 @@
   const DEFAULT_LANG = "en";
   const RTL_LANGS = new Set(["ar", "he"]);
   const SUPPORTED_LANGS = [
-    "en",
     "ru",
+    "en",
     "uk",
     "de",
     "fr",
@@ -216,6 +216,7 @@
       eventNameLabel: "Название события",
       eventNamePlaceholder: "Например: Моя олимпиада",
       eventDateLabel: "Дата события",
+      eventTimeLabel: "Время события",
       submitButton: "Запустить таймер",
       eventTitleLabel: "Событие:",
       eventDateTextLabel: "Дата:",
@@ -244,6 +245,7 @@
       eventNameLabel: "Event Name",
       eventNamePlaceholder: "For example: My Olympiad",
       eventDateLabel: "Event Date",
+      eventTimeLabel: "Event Time",
       submitButton: "Start Countdown",
       eventTitleLabel: "Event:",
       eventDateTextLabel: "Date:",
@@ -635,6 +637,7 @@
     languageSelect: document.getElementById("language-select"),
     nameInput: document.getElementById("event-name"),
     dateInput: document.getElementById("event-date"),
+    timeInput: document.getElementById("event-time"),
     eventTitle: document.getElementById("event-title"),
     eventDateText: document.getElementById("event-date-text"),
     statusMessage: document.getElementById("status-message"),
@@ -645,6 +648,7 @@
     controlsTitle: document.getElementById("controls-title"),
     eventNameLabel: document.getElementById("event-name-label"),
     eventDateLabel: document.getElementById("event-date-label"),
+    eventTimeLabel: document.getElementById("event-time-label"),
     submitButton: document.getElementById("submit-button"),
     eventTitleLabel: document.getElementById("event-title-label"),
     eventDateTextLabel: document.getElementById("event-date-text-label"),
@@ -704,11 +708,12 @@
 
     const title = dom.nameInput.value.trim();
     const dateRaw = dom.dateInput.value;
+    const timeRaw = dom.timeInput.value || "00:00";
     if (!title || !dateRaw) {
       return;
     }
 
-    const chosenDate = new Date(`${dateRaw}T00:00:00`);
+    const chosenDate = new Date(`${dateRaw}T${timeRaw}:00`);
     if (Number.isNaN(chosenDate.getTime())) {
       return;
     }
@@ -716,7 +721,11 @@
     // Подтверждение при смене уже выбранного события.
     if (
       currentEvent &&
-      (currentEvent.title !== title || toDateInputValue(currentEvent.date) !== dateRaw)
+      (
+        currentEvent.title !== title ||
+        toDateInputValue(currentEvent.date) !== dateRaw ||
+        toTimeInputValue(currentEvent.date) !== timeRaw
+      )
     ) {
       const accepted = window.confirm(t("confirmNewEvent"));
       if (!accepted) {
@@ -837,7 +846,8 @@
       STORAGE_KEY,
       JSON.stringify({
         title: eventData.title,
-        date: toDateInputValue(eventData.date)
+        date: toDateInputValue(eventData.date),
+        time: toTimeInputValue(eventData.date)
       })
     );
   }
@@ -856,7 +866,8 @@
         return;
       }
 
-      const restoredDate = new Date(`${parsed.date}T00:00:00`);
+      const restoredTime = typeof parsed.time === "string" ? parsed.time : "00:00";
+      const restoredDate = new Date(`${parsed.date}T${restoredTime}:00`);
       if (Number.isNaN(restoredDate.getTime())) {
         setEmptyState();
         return;
@@ -866,6 +877,7 @@
       hasSentFinishNotification = false;
       dom.nameInput.value = parsed.title;
       dom.dateInput.value = parsed.date;
+      dom.timeInput.value = restoredTime;
       renderEventSummary(currentEvent);
       startOrRefreshTimer();
     } catch (error) {
@@ -889,11 +901,19 @@
     return `${year}-${month}-${day}`;
   }
 
+  function toTimeInputValue(dateValue) {
+    const hours = String(dateValue.getHours()).padStart(2, "0");
+    const minutes = String(dateValue.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
+
   function formatLocalizedDate(dateValue) {
     return new Intl.DateTimeFormat(getDateLocale(currentLang), {
       day: "2-digit",
       month: "2-digit",
-      year: "numeric"
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
     }).format(dateValue);
   }
 
@@ -965,6 +985,7 @@
     dom.eventNameLabel.textContent = langSet.eventNameLabel;
     dom.nameInput.placeholder = langSet.eventNamePlaceholder;
     dom.eventDateLabel.textContent = langSet.eventDateLabel;
+    dom.eventTimeLabel.textContent = langSet.eventTimeLabel || "Event Time";
     dom.submitButton.textContent = langSet.submitButton;
     dom.eventTitleLabel.textContent = langSet.eventTitleLabel;
     dom.eventDateTextLabel.textContent = langSet.eventDateTextLabel;
