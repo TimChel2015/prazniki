@@ -190,8 +190,8 @@
   const DEFAULT_LANG = "en";
   const RTL_LANGS = new Set(["ar", "he"]);
   const SUPPORTED_LANGS = [
-    "ru",
     "en",
+    "ru",
     "uk",
     "de",
     "fr",
