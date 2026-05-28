@@ -61,6 +61,16 @@
             <input id="event-time" name="event-time" type="time" required value="00:00" />
           </div>
 
+          <div class="field">
+            <label for="notify-mode" id="notify-mode-label">Уведомление при завершении</label>
+            <select id="notify-mode" name="notify-mode">
+              <option value="sound_notification">Сообщение + звук</option>
+              <option value="sound_only">Только звук</option>
+              <option value="notification_only">Только сообщение</option>
+              <option value="no_notification">Без сообщения и звука</option>
+            </select>
+          </div>
+
           <button type="submit" class="btn-primary" id="submit-button">Запустить таймер</button>
         </form>
       </section>
