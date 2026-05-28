@@ -254,3 +254,31 @@ option {
     transform: translateY(0);
   }
 }
+.fact-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+/* Светлая тема */
+body.light-theme .fact-card {
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Контент внутри */
+.fact-card p {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+/* В светлой теме делаем “чёрный блок факта” */
+body.light-theme .fact-card p {
+  background: #000;
+  color: #fff;
+}
