@@ -187,7 +187,9 @@
   const STORAGE_KEY = "importantEventTimerData";
   const FACT_STORAGE_KEY = "factOfTheDay";
   const LANG_STORAGE_KEY = "importantEventTimerLang";
+  const NOTIFY_MODE_KEY = "importantEventTimerNotifyMode";
   const DEFAULT_LANG = "en";
+  const DEFAULT_NOTIFY_MODE = "sound_notification";
   const RTL_LANGS = new Set(["ar", "he"]);
   const SUPPORTED_LANGS = [
     "ru",
@@ -217,6 +219,11 @@
       eventNamePlaceholder: "Например: Моя олимпиада",
       eventDateLabel: "Дата события",
       eventTimeLabel: "Время события",
+      notifyModeLabel: "Уведомление при завершении",
+      notifyModeSound: "Сообщение + звук",
+      notifyModeSoundOnly: "Только звук",
+      notifyModeOnly: "Только сообщение",
+      notifyModeOff: "Без сообщения и звука",
       submitButton: "Запустить таймер",
       eventTitleLabel: "Событие:",
       eventDateTextLabel: "Дата:",
@@ -246,6 +253,11 @@
       eventNamePlaceholder: "For example: My Olympiad",
       eventDateLabel: "Event Date",
       eventTimeLabel: "Event Time",
+      notifyModeLabel: "Notification on finish",
+      notifyModeSound: "Message + sound",
+      notifyModeSoundOnly: "Sound only",
+      notifyModeOnly: "Message only",
+      notifyModeOff: "No message and sound",
       submitButton: "Start Countdown",
       eventTitleLabel: "Event:",
       eventDateTextLabel: "Date:",
@@ -274,6 +286,12 @@
       eventNameLabel: "Назва події",
       eventNamePlaceholder: "Наприклад: Моя олімпіада",
       eventDateLabel: "Дата події",
+      eventTimeLabel: "Час події",
+      notifyModeLabel: "Сповіщення після завершення",
+      notifyModeSound: "Повідомлення + звук",
+      notifyModeSoundOnly: "Лише звук",
+      notifyModeOnly: "Лише повідомлення",
+      notifyModeOff: "Без повідомлення і звуку",
       submitButton: "Запустити таймер",
       eventTitleLabel: "Подія:",
       eventDateTextLabel: "Дата:",
@@ -302,6 +320,12 @@
       eventNameLabel: "Ereignisname",
       eventNamePlaceholder: "Zum Beispiel: Meine Olympiade",
       eventDateLabel: "Ereignisdatum",
+      eventTimeLabel: "Ereigniszeit",
+      notifyModeLabel: "Benachrichtigung beim Ende",
+      notifyModeSound: "Nachricht + Ton",
+      notifyModeSoundOnly: "Nur Ton",
+      notifyModeOnly: "Nur Nachricht",
+      notifyModeOff: "Keine Nachricht und kein Ton",
       submitButton: "Timer starten",
       eventTitleLabel: "Ereignis:",
       eventDateTextLabel: "Datum:",
@@ -330,6 +354,12 @@
       eventNameLabel: "Nom de l'evenement",
       eventNamePlaceholder: "Par exemple: Mon olympiade",
       eventDateLabel: "Date de l'evenement",
+      eventTimeLabel: "Heure de l'evenement",
+      notifyModeLabel: "Notification a la fin",
+      notifyModeSound: "Message + son",
+      notifyModeSoundOnly: "Son uniquement",
+      notifyModeOnly: "Message uniquement",
+      notifyModeOff: "Sans message ni son",
       submitButton: "Demarrer le minuteur",
       eventTitleLabel: "Evenement :",
       eventDateTextLabel: "Date :",
@@ -358,6 +388,12 @@
       eventNameLabel: "Nombre del evento",
       eventNamePlaceholder: "Por ejemplo: Mi olimpiada",
       eventDateLabel: "Fecha del evento",
+      eventTimeLabel: "Hora del evento",
+      notifyModeLabel: "Notificacion al finalizar",
+      notifyModeSound: "Mensaje + sonido",
+      notifyModeSoundOnly: "Solo sonido",
+      notifyModeOnly: "Solo mensaje",
+      notifyModeOff: "Sin mensaje ni sonido",
       submitButton: "Iniciar temporizador",
       eventTitleLabel: "Evento:",
       eventDateTextLabel: "Fecha:",
@@ -386,6 +422,12 @@
       eventNameLabel: "Nome evento",
       eventNamePlaceholder: "Per esempio: La mia olimpiade",
       eventDateLabel: "Data evento",
+      eventTimeLabel: "Ora evento",
+      notifyModeLabel: "Notifica al termine",
+      notifyModeSound: "Messaggio + suono",
+      notifyModeSoundOnly: "Solo suono",
+      notifyModeOnly: "Solo messaggio",
+      notifyModeOff: "Nessun messaggio e nessun suono",
       submitButton: "Avvia timer",
       eventTitleLabel: "Evento:",
       eventDateTextLabel: "Data:",
@@ -414,6 +456,12 @@
       eventNameLabel: "Nome do evento",
       eventNamePlaceholder: "Por exemplo: Minha olimpiada",
       eventDateLabel: "Data do evento",
+      eventTimeLabel: "Hora do evento",
+      notifyModeLabel: "Notificacao ao terminar",
+      notifyModeSound: "Mensagem + som",
+      notifyModeSoundOnly: "Som apenas",
+      notifyModeOnly: "Apenas mensagem",
+      notifyModeOff: "Sem mensagem e sem som",
       submitButton: "Iniciar temporizador",
       eventTitleLabel: "Evento:",
       eventDateTextLabel: "Data:",
@@ -442,6 +490,12 @@
       eventNameLabel: "Nazwa wydarzenia",
       eventNamePlaceholder: "Na przyklad: Moja olimpiada",
       eventDateLabel: "Data wydarzenia",
+      eventTimeLabel: "Godzina wydarzenia",
+      notifyModeLabel: "Powiadomienie po zakonczeniu",
+      notifyModeSound: "Wiadomosc + dzwiek",
+      notifyModeSoundOnly: "Tylko dzwiek",
+      notifyModeOnly: "Tylko wiadomosc",
+      notifyModeOff: "Bez wiadomosci i dzwieku",
       submitButton: "Uruchom licznik",
       eventTitleLabel: "Wydarzenie:",
       eventDateTextLabel: "Data:",
@@ -470,6 +524,12 @@
       eventNameLabel: "Etkinlik adi",
       eventNamePlaceholder: "Ornegin: Olimpiyatim",
       eventDateLabel: "Etkinlik tarihi",
+      eventTimeLabel: "Etkinlik saati",
+      notifyModeLabel: "Bitince bildirim",
+      notifyModeSound: "Mesaj + ses",
+      notifyModeSoundOnly: "Sadece ses",
+      notifyModeOnly: "Sadece mesaj",
+      notifyModeOff: "Mesaj ve ses yok",
       submitButton: "Sayaci baslat",
       eventTitleLabel: "Etkinlik:",
       eventDateTextLabel: "Tarih:",
@@ -498,6 +558,12 @@
       eventNameLabel: "اسم الحدث",
       eventNamePlaceholder: "مثال: اولمبيادي",
       eventDateLabel: "تاريخ الحدث",
+      eventTimeLabel: "وقت الحدث",
+      notifyModeLabel: "التنبيه عند الانتهاء",
+      notifyModeSound: "رسالة + صوت",
+      notifyModeSoundOnly: "صوت فقط",
+      notifyModeOnly: "رسالة فقط",
+      notifyModeOff: "بدون رسالة وبدون صوت",
       submitButton: "ابدأ العداد",
       eventTitleLabel: "الحدث:",
       eventDateTextLabel: "التاريخ:",
@@ -526,6 +592,12 @@
       eventNameLabel: "שם האירוע",
       eventNamePlaceholder: "לדוגמה: האולימפיאדה שלי",
       eventDateLabel: "תאריך האירוע",
+      eventTimeLabel: "שעת האירוע",
+      notifyModeLabel: "התראה בסיום",
+      notifyModeSound: "הודעה + צליל",
+      notifyModeSoundOnly: "צליל בלבד",
+      notifyModeOnly: "הודעה בלבד",
+      notifyModeOff: "ללא הודעה וללא צליל",
       submitButton: "הפעל טיימר",
       eventTitleLabel: "אירוע:",
       eventDateTextLabel: "תאריך:",
@@ -554,6 +626,12 @@
       eventNameLabel: "事件名称",
       eventNamePlaceholder: "例如：我的奥林匹克",
       eventDateLabel: "事件日期",
+      eventTimeLabel: "事件时间",
+      notifyModeLabel: "结束时通知",
+      notifyModeSound: "消息 + 声音",
+      notifyModeSoundOnly: "仅声音",
+      notifyModeOnly: "仅消息",
+      notifyModeOff: "无消息和声音",
       submitButton: "开始倒计时",
       eventTitleLabel: "事件：",
       eventDateTextLabel: "日期：",
@@ -582,6 +660,12 @@
       eventNameLabel: "イベント名",
       eventNamePlaceholder: "例：私のオリンピック",
       eventDateLabel: "イベント日付",
+      eventTimeLabel: "イベント時刻",
+      notifyModeLabel: "終了時の通知",
+      notifyModeSound: "メッセージ + 音",
+      notifyModeSoundOnly: "音のみ",
+      notifyModeOnly: "メッセージのみ",
+      notifyModeOff: "メッセージと音なし",
       submitButton: "タイマー開始",
       eventTitleLabel: "イベント：",
       eventDateTextLabel: "日付：",
@@ -610,6 +694,12 @@
       eventNameLabel: "이벤트 이름",
       eventNamePlaceholder: "예: 나의 올림피아드",
       eventDateLabel: "이벤트 날짜",
+      eventTimeLabel: "이벤트 시간",
+      notifyModeLabel: "종료 시 알림",
+      notifyModeSound: "메시지 + 소리",
+      notifyModeSoundOnly: "소리만",
+      notifyModeOnly: "메시지만",
+      notifyModeOff: "메시지와 소리 없음",
       submitButton: "타이머 시작",
       eventTitleLabel: "이벤트:",
       eventDateTextLabel: "날짜:",
@@ -635,6 +725,7 @@
   const dom = {
     form: document.getElementById("event-form"),
     languageSelect: document.getElementById("language-select"),
+    notifyModeSelect: document.getElementById("notify-mode"),
     nameInput: document.getElementById("event-name"),
     dateInput: document.getElementById("event-date"),
     timeInput: document.getElementById("event-time"),
@@ -649,6 +740,7 @@
     eventNameLabel: document.getElementById("event-name-label"),
     eventDateLabel: document.getElementById("event-date-label"),
     eventTimeLabel: document.getElementById("event-time-label"),
+    notifyModeLabel: document.getElementById("notify-mode-label"),
     submitButton: document.getElementById("submit-button"),
     eventTitleLabel: document.getElementById("event-title-label"),
     eventDateTextLabel: document.getElementById("event-date-text-label"),
@@ -675,11 +767,13 @@
   let currentEvent = null;
   let hasSentFinishNotification = false;
   let currentLang = DEFAULT_LANG;
+  let notifyMode = DEFAULT_NOTIFY_MODE;
 
   init();
 
   function init() {
     loadLanguage();
+    loadNotifyMode();
     applyLanguage(currentLang);
     bindEvents();
     renderFactOfDay();
@@ -689,6 +783,12 @@
   function bindEvents() {
     dom.form.addEventListener("submit", onFormSubmit);
     dom.languageSelect.addEventListener("change", onLanguageChange);
+    dom.notifyModeSelect.addEventListener("change", onNotifyModeChange);
+  }
+
+  function onNotifyModeChange() {
+    notifyMode = getSupportedNotifyMode(dom.notifyModeSelect.value);
+    localStorage.setItem(NOTIFY_MODE_KEY, notifyMode);
   }
 
   function onLanguageChange() {
@@ -943,9 +1043,22 @@
     }
 
     hasSentFinishNotification = true;
+    const mode = getSupportedNotifyMode(notifyMode);
+
+    if (mode === "no_notification") {
+      return;
+    }
+
+    if (mode === "sound_only") {
+      playFinishSound();
+      return;
+    }
 
     // Отправляем уведомление только если браузер поддерживает и есть разрешение.
     if (!("Notification" in window)) {
+      if (mode === "sound_notification") {
+        playFinishSound();
+      }
       return;
     }
 
@@ -953,6 +1066,9 @@
       new Notification(t("notifyTitle"), {
         body: t("notifyBody").replace("{event}", currentEvent.title)
       });
+      if (mode === "sound_notification") {
+        playFinishSound();
+      }
       return;
     }
 
@@ -962,14 +1078,42 @@
           new Notification(t("notifyTitle"), {
             body: t("notifyBody").replace("{event}", currentEvent.title)
           });
+          if (mode === "sound_notification") {
+            playFinishSound();
+          }
         }
       });
     }
   }
 
+  function playFinishSound() {
+    if (!("AudioContext" in window || "webkitAudioContext" in window)) {
+      return;
+    }
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new Ctx();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = 880;
+    gainNode.gain.value = 0.12;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.3);
+  }
+
   function loadLanguage() {
     const storedLang = localStorage.getItem(LANG_STORAGE_KEY);
     currentLang = getSupportedLanguage(storedLang);
+  }
+
+  function loadNotifyMode() {
+    const storedMode = localStorage.getItem(NOTIFY_MODE_KEY);
+    notifyMode = getSupportedNotifyMode(storedMode);
+    dom.notifyModeSelect.value = notifyMode;
   }
 
   function applyLanguage(lang) {
@@ -986,6 +1130,8 @@
     dom.nameInput.placeholder = langSet.eventNamePlaceholder;
     dom.eventDateLabel.textContent = langSet.eventDateLabel;
     dom.eventTimeLabel.textContent = langSet.eventTimeLabel || "Event Time";
+    dom.notifyModeLabel.textContent = langSet.notifyModeLabel || "Notification on finish";
+    updateNotifyModeOptionsText(langSet);
     dom.submitButton.textContent = langSet.submitButton;
     dom.eventTitleLabel.textContent = langSet.eventTitleLabel;
     dom.eventDateTextLabel.textContent = langSet.eventDateTextLabel;
@@ -1011,6 +1157,11 @@
 
   function getSupportedLanguage(lang) {
     return SUPPORTED_LANGS.includes(lang) ? lang : DEFAULT_LANG;
+  }
+
+  function getSupportedNotifyMode(mode) {
+    const modes = ["sound_notification", "sound_only", "notification_only", "no_notification"];
+    return modes.includes(mode) ? mode : DEFAULT_NOTIFY_MODE;
   }
 
   function getLangSet() {
@@ -1040,6 +1191,22 @@
       ko: "ko-KR"
     };
     return locales[lang] || "ru-RU";
+  }
+
+  function updateNotifyModeOptionsText(langSet) {
+    const options = dom.notifyModeSelect.options;
+    for (let i = 0; i < options.length; i += 1) {
+      const option = options[i];
+      if (option.value === "sound_notification") {
+        option.textContent = langSet.notifyModeSound || "Message + sound";
+      } else if (option.value === "sound_only") {
+        option.textContent = langSet.notifyModeSoundOnly || "Sound only";
+      } else if (option.value === "notification_only") {
+        option.textContent = langSet.notifyModeOnly || "Message only";
+      } else if (option.value === "no_notification") {
+        option.textContent = langSet.notifyModeOff || "No message and sound";
+      }
+    }
   }
 
   function renderFactOfDay() {
