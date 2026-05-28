@@ -61,6 +61,21 @@ body {
   animation: fadeUp 0.8s ease;
 }
 
+.lang-switcher {
+  margin-bottom: 12px;
+  display: inline-grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.lang-switcher label {
+  font-size: 0.9rem;
+}
+
+.lang-switcher select {
+  min-width: 210px;
+}
+
 .hero h1 {
   margin: 0;
   font-size: clamp(1.8rem, 2.8vw, 2.8rem);
@@ -239,4 +254,3 @@ option {
     transform: translateY(0);
   }
 }
- 
