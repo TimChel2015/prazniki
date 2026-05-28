@@ -1,12 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Таймер до важного события</title>
     <link rel="stylesheet" href="./styles.css" />
+    
+    <style>
+      .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        z-index: 9999;
+      }
+
+      #themeToggle {
+        width: 52px;
+        height: 52px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 22px;
+        background: linear-gradient(135deg, #52d3aa, #7aa7ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+      }
+
+      #themeToggle:active {
+        transform: scale(0.95);
+      }
+
+      body.light-theme {
+        background: #f5f5f5;
+        color: #000;
+      }
+
+      body.light-theme .card {
+        background: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      body.light-theme input,
+      body.light-theme select {
+        background: #fff;
+        color: #000;
+        border: 1px solid #ccc;
+      }
+    </style>
   </head>
   <body>
+    <div class="theme-switch">
+      <button id="themeToggle" type="button" aria-label="Переключить тему оформления">🌙</button>
+    </div>
+
     <div class="bg-blur bg-blur--one"></div>
     <div class="bg-blur bg-blur--two"></div>
 
@@ -64,10 +112,10 @@
           <div class="field">
             <label for="notify-mode" id="notify-mode-label">Уведомление при завершении</label>
             <select id="notify-mode" name="notify-mode">
-              <option value="sound_notification">Сообщение + звук</option>
-              <option value="sound_only">Только звук</option>
-              <option value="notification_only">Только сообщение</option>
-              <option value="no_notification">Без сообщения и звука</option>
+              <option value="sound_notification"></option>
+              <option value="sound_only"></option>
+              <option value="notification_only"></option>
+              <option value="no_notification"></option>
             </select>
           </div>
 
@@ -122,82 +170,23 @@
     </main>
 
     <script src="./script.js"></script>
+
+    <script>
+      (function() {
+        const themeButton = document.getElementById("themeToggle");
+
+        if (localStorage.getItem("theme") === "light") {
+          document.body.classList.add("light-theme");
+          themeButton.innerHTML = "☀️";
+        }
+
+        themeButton.addEventListener("click", () => {
+          document.body.classList.toggle("light-theme");
+          const isLight = document.body.classList.contains("light-theme");
+          themeButton.innerHTML = isLight ? "☀️" : "🌙";
+          localStorage.setItem("theme", isLight ? "light" : "dark");
+        });
+      })();
+    </script>
   </body>
-</html>
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Таймер до важного события</title>
-
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
-<body>
-
-  <!-- КНОПКА ТЕМЫ -->
-  <div class="theme-switch">
-    <button id="themeToggle">🌙</button>
-  </div>
-
-  <!-- ТВОЙ САЙТ -->
-  <div class="bg-blur bg-blur--one"></div>
-  <div class="bg-blur bg-blur--two"></div>
-
-  <main class="container">
-    ...
-  </main>
-
-  <!-- СТИЛИ (временно можно тут, но лучше в CSS файле) -->
-  <style>
-    .theme-switch{
-      position:fixed;
-      top:20px;
-      right:25px;
-      z-index:9999;
-    }
-
-    #themeToggle{
-      width:52px;
-      height:52px;
-      border:none;
-      border-radius:50%;
-      cursor:pointer;
-      font-size:22px;
-      background:linear-gradient(135deg,#52d3aa,#7aa7ff);
-    }
-
-    body.light-theme{
-      background:#f5f5f5;
-      color:#000;
-    }
-
-    body.light-theme input,
-    body.light-theme select{
-      background:#fff;
-      color:#000;
-    }
-  </style>
-
-  <!-- СКРИПТ -->
-  <script>
-    const button = document.getElementById("themeToggle");
-
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light-theme");
-      button.innerHTML = "☀️";
-    }
-
-    button.addEventListener("click", () => {
-      document.body.classList.toggle("light-theme");
-
-      const isLight = document.body.classList.contains("light-theme");
-
-      button.innerHTML = isLight ? "☀️" : "🌙";
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-    });
-  </script>
-
-</body>
 </html>
