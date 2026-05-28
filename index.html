@@ -12,28 +12,35 @@
 
     <main class="container">
       <header class="hero">
+        <div class="lang-switcher">
+          <label for="language-select" id="language-label">Язык</label>
+          <select id="language-select" name="language-select" aria-label="Выбор языка">
+            <option value="ru">Русский</option>
+            <option value="en">English</option>
+            <option value="uk">Українська</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="pl">Polski</option>
+            <option value="tr">Türkçe</option>
+            <option value="ar">العربية</option>
+            <option value="he">עברית</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+          </select>
+        </div>
         <h1>Таймер до важного события</h1>
-        <p class="hero-subtitle">Выберите событие и узнайте, сколько осталось времени.</p>
+        <p class="hero-subtitle" id="hero-subtitle">Выберите событие и узнайте, сколько осталось времени.</p>
       </header>
 
       <section class="card controls-card">
-        <h2>Выбор события</h2>
+        <h2 id="controls-title">Выбор события</h2>
         <form id="event-form" class="event-form">
           <div class="field">
-            <label for="preset-event">Готовые события</label>
-            <select id="preset-event" name="preset-event">
-              <option value="none">-- Выбрать из списка --</option>
-              <option value="birthday-1">День рождения тимура (25/09)</option>
-              <option value="vacation">Летние каникулы (30/06)</option>
-              <option value="new-year">Новый год (30/12)</option>
-              <option value="birthday-2">День рождения даши (20/06)</option>
-              <option value="birthday-3">День рождения рама(25/12)</option>
-              <option value="birthday-4">День рождения артура и илюши(03/02)</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="event-name">Название события</label>
+            <label for="event-name" id="event-name-label">Название события</label>
             <input
               id="event-name"
               name="event-name"
@@ -45,18 +52,18 @@
           </div>
 
           <div class="field">
-            <label for="event-date">Дата события</label>
+            <label for="event-date" id="event-date-label">Дата события</label>
             <input id="event-date" name="event-date" type="date" required />
           </div>
 
-          <button type="submit" class="btn-primary">Запустить таймер</button>
+          <button type="submit" class="btn-primary" id="submit-button">Запустить таймер</button>
         </form>
       </section>
 
       <section class="card countdown-card">
         <div class="event-summary">
-          <p><span>Событие:</span> <strong id="event-title">-</strong></p>
-          <p><span>Дата:</span> <strong id="event-date-text">-</strong></p>
+          <p><span id="event-title-label">Событие:</span> <strong id="event-title">-</strong></p>
+          <p><span id="event-date-text-label">Дата:</span> <strong id="event-date-text">-</strong></p>
         </div>
 
         <p id="status-message" class="status-message" aria-live="polite"></p>
@@ -64,37 +71,37 @@
         <div class="timer-grid" aria-live="polite">
           <div class="time-box">
             <span id="years">0</span>
-            <small>Лет</small>
+            <small id="years-label">Года</small>
           </div>
           <div class="time-box">
             <span id="months">0</span>
-            <small>Месяцев</small>
+            <small id="months-label">Месяцев</small>
           </div>
           <div class="time-box">
             <span id="weeks">0</span>
-            <small>Недель</small>
+            <small id="weeks-label">Недель</small>
           </div>
           <div class="time-box">
             <span id="days">0</span>
-            <small>Дней</small>
+            <small id="days-label">Дней</small>
           </div>
           <div class="time-box">
             <span id="hours">0</span>
-            <small>Часов</small>
+            <small id="hours-label">Часов</small>
           </div>
           <div class="time-box">
             <span id="minutes">0</span>
-            <small>Минут</small>
+            <small id="minutes-label">Минут</small>
           </div>
           <div class="time-box">
             <span id="seconds">0</span>
-            <small>Секунд</small>
+            <small id="seconds-label">Секунд</small>
           </div>
         </div>
       </section>
 
       <section class="card fact-card">
-        <h2>Факт дня</h2>
+        <h2 id="fact-title">Факт дня</h2>
         <p id="fact-day">Загружаем интересный факт...</p>
       </section>
     </main>
@@ -102,4 +109,3 @@
     <script src="./script.js"></script>
   </body>
 </html>
- 
