@@ -178,3 +178,108 @@ body.light-theme {
     font-weight: bold;
 }
 </style>
+<!-- КНОПКА ТЕМЫ ВВЕРХУ -->
+<div class="theme-switch">
+    <button id="themeToggle">🌙 Тёмная тема</button>
+</div>
+
+<script>
+const button = document.getElementById("themeToggle");
+
+// Проверка сохранённой темы
+if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light-theme");
+    button.innerHTML = "☀️ Светлая тема";
+}
+
+button.addEventListener("click", () => {
+    document.body.classList.toggle("light-theme");
+
+    if (document.body.classList.contains("light-theme")) {
+        button.innerHTML = "☀️ Светлая тема";
+        localStorage.setItem("theme", "light");
+    } else {
+        button.innerHTML = "🌙 Тёмная тема";
+        localStorage.setItem("theme", "dark");
+    }
+});
+</script>
+
+<style>
+
+/* ===== КНОПКА НАВЕРХУ ===== */
+.theme-switch{
+    width:100%;
+    display:flex;
+    justify-content:flex-end;
+    padding:20px 40px;
+    box-sizing:border-box;
+}
+
+/* ===== КНОПКА ===== */
+#themeToggle{
+    padding:12px 22px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#52d3aa,#7aa7ff);
+    color:black;
+    transition:0.3s;
+}
+
+/* ===== ТЁМНАЯ ТЕМА ===== */
+body{
+    background:#0b0f2f;
+    color:white;
+    transition:0.4s;
+}
+
+/* ВЕСЬ ТЕКСТ БЕЛЫЙ */
+body *{
+    color:white;
+}
+
+/* INPUTS ТЁМНЫЕ */
+input,
+select,
+textarea{
+    background:#3a3d57;
+    color:white;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== СВЕТЛАЯ ТЕМА ===== */
+body.light-theme{
+    background:#f4f4f4;
+    color:black;
+}
+
+/* ВЕСЬ ТЕКСТ ЧЁРНЫЙ */
+body.light-theme *{
+    color:black !important;
+}
+
+/* INPUTS СВЕТЛЫЕ */
+body.light-theme input,
+body.light-theme select,
+body.light-theme textarea{
+    background:white;
+    color:black !important;
+    border:1px solid #ccc;
+}
+
+/* КАРТОЧКИ И БЛОКИ */
+body.light-theme .card,
+body.light-theme .container,
+body.light-theme .box{
+    background:white;
+}
+
+/* PLACEHOLDER */
+body.light-theme input::placeholder{
+    color:#555;
+}
+
+</style>
