@@ -187,7 +187,7 @@
   const STORAGE_KEY = "importantEventTimerData";
   const FACT_STORAGE_KEY = "factOfTheDay";
   const LANG_STORAGE_KEY = "importantEventTimerLang";
-  const DEFAULT_LANG = "ru";
+  const DEFAULT_LANG = "en";
   const RTL_LANGS = new Set(["ar", "he"]);
   const SUPPORTED_LANGS = [
     "ru",
