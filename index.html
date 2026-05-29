@@ -108,14 +108,21 @@
             <label for="event-time" id="event-time-label">Время события</label>
             <input id="event-time" name="event-time" type="time" required value="00:00" />
           </div>
+<div class="field">
+  <label for="notify-mode" id="notify-mode-label">
+    Уведомление при завершении
+  </label>
 
-          <div class="field">
-            <label for="notify-mode" id="notify-mode-label">Уведомление при завершении</label>
-            <select id="notify-mode" name="notify-mode">
-              <option value="notification_only"></option>
-              <option value="no_notification"></option>
-            </select>
-          </div>
+  <select id="notify-mode" name="notify-mode">
+    <option value="notification_only">
+      Только уведомление
+    </option>
+
+    <option value="no_notification">
+      Без уведомления
+    </option>
+  </select>
+</div>
 
           <button type="submit" class="btn-primary" id="submit-button">Запустить таймер</button>
         </form>
